@@ -42,7 +42,6 @@ public class Inicio{
         op=sn.nextInt();
         switch(op){
         case 1:
-            String bases="";
             System.out.println("---Total de Ventas de producto---");
             Conexion1 con1 = new Conexion1();
             //Para las conexiones con las demas instancias tomando asi los procedimientos almacenados
@@ -52,61 +51,28 @@ public class Inicio{
             Scanner sn2=new Scanner(System.in);
             try{
                 System.out.println("\nIntroduzca la Categoria del producto:");
-                cat=sn2.nextInt();
-                //Llamamos al procedimiento almacenado
-                CallableStatement pal1 = con1.getConexion().prepareCall("{call sp_Ejercicioa(?)}");
-                //Agregamos el valor al procedimiento
-                pal1.setInt(1,cat);
-                //Ejecutamos la consulta al procedimiento
-                pal1.execute();
-                //Obtenemos los valores 
-                final ResultSet result = pal1.getResultSet();
-                while(result.next()){
-                   System.out.println(result.getRow()+" Total Ventas:"+result.getString(1)+" Territorio:"+result.getString(2)+" ID Territorio:"+result.getString(3));
-                }
-                result.close();
-                pal1.close();
-                
+                cat=sn2.nextInt();//Agregamos el valor para la consulta
+                con1.Conectar();//Nos conectamos a la instancia
+                System.out.println(con1.consulta1(cat));//Imprimos la consulta la procedimiento almacenado con la categoria agregada
+                con1.Desconectar();//Nos desconectamos de la base de datos   
             }catch(SQLException ex){
                 System.out.println(ex.toString());
             }
-            /*
-            Prueba de conexion
-            Conexion1 con = new Conexion1();
-            try{
-                Statement sql = con.getConexion().createStatement();
-                String consulta = "select * from Sales.SalesOrderHeader";
-                ResultSet resultado = sql.executeQuery(consulta);
-                while(resultado.next()){
-                    System.out.println("indice:"+resultado.getRow()+" valor1:"+resultado.getString(1));
-                }
-            }catch(SQLException ex){
-                System.out.println(ex.toString());
-            }
-            */
             break;
         case 2:
             System.out.println("---Consultar producto mas solicitado para norteamerica---");
             Conexion1 con1_2 = new Conexion1();
             try{
-                //Llamamos al procedimiento almacenado
-                CallableStatement pal1 = con1_2.getConexion().prepareCall("{call sp_Ejerciciob}");
-                //Agregamos el valor al procedimiento
-                //Ejecutamos la consulta al procedimiento
-                pal1.execute();
-                //Obtenemos los valores 
-                final ResultSet result = pal1.getResultSet();
-                while(result.next()){
-                   System.out.println(result.getRow()+" Producto:"+result.getString(1)+" Solicitudes:"+result.getString(2)+" Region:"+result.getString(3));
-                }
-                
+                con1_2.Conectar();//Nos conectamos a la instancia
+                System.out.println(con1_2.consulta2());//Imprimos la consulta la procedimiento almacenado con la categoria agregada
+                con1_2.Desconectar();//Nos desconectamos de la base de datos   
             }catch(SQLException ex){
                 System.out.println(ex.toString());
             }
-            
             break;
         case 3:
             System.out.println("---Actualizar Stock por categoria un 5%---");
+            
             int cat2,ID;
             Scanner sn3=new Scanner(System.in);
             Conexion1 con1_3 = new Conexion1();
@@ -115,15 +81,9 @@ public class Inicio{
                 cat2=sn3.nextInt();
                 System.out.println("\nIntroduzca la locacion ID:");
                 ID=sn3.nextInt();
-                //Llamamos al procedimiento almacenado
-                CallableStatement pal1 = con1_3.getConexion().prepareCall("{call sp_Ejercicioc(?,?)}");
-                //Agregamos el valor al procedimiento
-                pal1.setInt(1,cat2);
-                pal1.setInt(2, ID);
-                //Ejecutamos la consulta al procedimiento
-                pal1.execute();
-                //Obtenemos los valores 
-                System.out.println("Stock Actualizado");
+                con1_3.Conectar();
+                System.out.println(con1_3.consulta3(cat2, ID));
+                con1_3.Desconectar();
             }catch(SQLException ex){
                 System.out.println(ex.toString());
             }
@@ -132,16 +92,9 @@ public class Inicio{
             System.out.println("---Determinacion de clientes en otras regiones---");
             Conexion1 con1_4 = new Conexion1();
             try{
-                //Llamamos al procedimiento almacenado
-                CallableStatement pal1 = con1_4.getConexion().prepareCall("{call sp_Ejerciciod}");
-                //Agregamos el valor al procedimiento
-                //Ejecutamos la consulta al procedimiento
-                pal1.execute();
-                //Obtenemos los valores 
-                final ResultSet result = pal1.getResultSet();
-                while(result.next()){
-                   System.out.println(result.getRow()+" ID: "+result.getString(1)+" TeritorioPedido:"+result.getString(2)+" TerritorioMandado:"+result.getString(3));
-                }
+                 con1_4.Conectar();//Nos conectamos a la instancia
+                System.out.println(con1_4.consulta4());//Imprimos la consulta la procedimiento almacenado con la categoria agregada
+                con1_4.Desconectar();//Nos desconectamos de la base de datos   
             }catch(SQLException ex){
                 System.out.println(ex.toString());
             }
@@ -158,16 +111,9 @@ public class Inicio{
                 PID=sn4.nextInt();
                 System.out.println("\nIntroduzca la cantidad:");
                 cant=sn4.nextInt();
-                //Llamamos al procedimiento almacenado
-                CallableStatement pal1 = con1_5.getConexion().prepareCall("{call sp_Ejercicioe(?,?,?)}");
-                //Agregamos el valor al procedimiento
-                pal1.setInt(1,ID2);
-                pal1.setInt(2, PID);
-                pal1.setInt(3,cant);
-                //Ejecutamos la consulta al procedimiento
-                pal1.execute();
-                //Obtenemos los valores 
-               System.out.println("Cantidad Actualizada");
+                con1_5.Conectar();//Nos conectamos a la instancia
+                System.out.println(con1_5.consulta5(ID2,PID,cant));//Imprimos la consulta la procedimiento almacenado con la categoria agregada
+                con1_5.Desconectar();//Nos desconectamos de la base de datos   
             }catch(SQLException ex){
                 System.out.println(ex.toString());
             }
@@ -182,15 +128,9 @@ public class Inicio{
                 ID3=sn5.nextInt();
                 System.out.println("\nIntroduzca el ID del metodo de envio nuevo:");
                 dir=sn5.nextInt();
-                //Llamamos al procedimiento almacenado
-                CallableStatement pal1 = con1_6.getConexion().prepareCall("{call sp_Ejercicioe(?,?)}");
-                //Agregamos el valor al procedimiento
-                pal1.setInt(1,ID3);
-                pal1.setInt(2, dir);
-                //Ejecutamos la consulta al procedimiento
-                pal1.execute();
-                //Obtenemos los valores 
-                 System.out.println("Metodo Actualizado");
+                con1_6.Conectar();//Nos conectamos a la instancia
+                System.out.println(con1_6.consulta6(ID3,dir));//Imprimos la consulta la procedimiento almacenado con la categoria agregada
+                con1_6.Desconectar();//Nos desconectamos de la base de datos   
             }catch(SQLException ex){
                 System.out.println(ex.toString());
             }
@@ -206,16 +146,9 @@ public class Inicio{
                 IDP=sn6.nextInt();
                 System.out.println("\nIntroduzca el nuevo email:");
                 email=sn6.next();
-                //Llamamos al procedimiento almacenado
-                CallableStatement pal1 = con1_7.getConexion().prepareCall("{call sp_Ejercicioe(?,?)}");
-                //Agregamos el valor al procedimiento
-                pal1.setInt(1,IDP);
-                pal1.setString(2, email);
-                //Ejecutamos la consulta al procedimiento
-                pal1.execute();
-                //Obtenemos los valores 
-                
-                System.out.println("Email Actualizado");
+                con1_7.Conectar();//Nos conectamos a la instancia
+                System.out.println(con1_7.consulta7(IDP,email));//Imprimos la consulta la procedimiento almacenado con la categoria agregada
+                con1_7.Desconectar();//Nos desconectamos de la base de datos   
             }catch(SQLException ex){
                 System.out.println(ex.toString());
             }
