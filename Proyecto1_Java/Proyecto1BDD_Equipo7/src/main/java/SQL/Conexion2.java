@@ -1,5 +1,5 @@
 /*
- * Clase de conexion Para la parte distribuida
+ * Clase de conexion, ejecucion de procedimientos almacenados y desconexion para una sola instancia sin distribuir
  */
 package SQL;
 
@@ -15,10 +15,12 @@ import java.sql.SQLException;
  */
 public class Conexion2 {
     Connection conexion;
-    String BD_URL = "jdbc:sqlserver://LAPTOP-43UIJK1R:1434;"
-                    +"database=;"
+    
+    String BD_URL = "jdbc:sqlserver://localhost:1433;"
+                    +"database=master;"
                     +"user=sa;"
                     +"password=112233445566778899;"
+                    +"encrypt=true;"+"trustServerCertificate=true;"
                     +"loginTimeout=30;";
     CallableStatement statement = null;
     ResultSet result = null;

@@ -5,8 +5,6 @@ package Principal;
 
 import SQL.Conexion1;
 import SQL.Conexion2;
-import SQL.Conexion3;
-import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,25 +41,24 @@ public class Inicio{
         switch(op){
         case 1:
             System.out.println("---Total de Ventas de producto---");
-            Conexion1 con1 = new Conexion1();
+            //Conexion1 con1 = new Conexion1();
             //Para las conexiones con las demas instancias tomando asi los procedimientos almacenados
-            //Conexion2 con2 = new Conexion2();
-            //Conexion3 con3 = new Conexion3();
+            Conexion2 con2 = new Conexion2();
             int cat;
             Scanner sn2=new Scanner(System.in);
             try{
                 System.out.println("\nIntroduzca la Categoria del producto:");
                 cat=sn2.nextInt();//Agregamos el valor para la consulta
-                con1.Conectar();//Nos conectamos a la instancia
-                System.out.println(con1.consulta1(cat));//Imprimos la consulta la procedimiento almacenado con la categoria agregada
-                con1.Desconectar();//Nos desconectamos de la base de datos   
+                con2.Conectar();//Nos conectamos a la instancia
+                System.out.println(con2.consulta1(cat));//Imprimos la consulta la procedimiento almacenado con la categoria agregada
+                con2.Desconectar();//Nos desconectamos de la base de datos   
             }catch(SQLException ex){
                 System.out.println(ex.toString());
             }
             break;
         case 2:
             System.out.println("---Consultar producto mas solicitado para norteamerica---");
-            Conexion1 con1_2 = new Conexion1();
+            Conexion2 con1_2 = new Conexion2();
             try{
                 con1_2.Conectar();//Nos conectamos a la instancia
                 System.out.println(con1_2.consulta2());//Imprimos la consulta la procedimiento almacenado con la categoria agregada
@@ -75,7 +72,7 @@ public class Inicio{
             
             int cat2,ID;
             Scanner sn3=new Scanner(System.in);
-            Conexion1 con1_3 = new Conexion1();
+            Conexion2 con1_3 = new Conexion2();
             try{
                 System.out.println("\nIntroduzca la Categoria del producto:");
                 cat2=sn3.nextInt();
@@ -90,7 +87,7 @@ public class Inicio{
             break;
         case 4:
             System.out.println("---Determinacion de clientes en otras regiones---");
-            Conexion1 con1_4 = new Conexion1();
+            Conexion2 con1_4 = new Conexion2();
             try{
                  con1_4.Conectar();//Nos conectamos a la instancia
                 System.out.println(con1_4.consulta4());//Imprimos la consulta la procedimiento almacenado con la categoria agregada
@@ -103,7 +100,7 @@ public class Inicio{
             System.out.println("---Actualizar cantidad de productos por orden---");
             int ID2,PID,cant;
             Scanner sn4=new Scanner(System.in);
-            Conexion1 con1_5 = new Conexion1();
+            Conexion2 con1_5 = new Conexion2();
             try{
                 System.out.println("\nIntroduzca el ID:");
                 ID2=sn4.nextInt();
@@ -122,7 +119,7 @@ public class Inicio{
             System.out.println("---Actualizar Metodo de envio de una orden---");
             int ID3,dir;
             Scanner sn5=new Scanner(System.in);
-            Conexion1 con1_6 = new Conexion1();
+            Conexion2 con1_6 = new Conexion2();
             try{
                 System.out.println("\nIntroduzca el ID:");
                 ID3=sn5.nextInt();
@@ -140,7 +137,7 @@ public class Inicio{
             int IDP;
             String email;
             Scanner sn6=new Scanner(System.in);
-            Conexion1 con1_7 = new Conexion1();
+            Conexion2 con1_7 = new Conexion2();
             try{
                 System.out.println("\nIntroduzca el ID de la persona:");
                 IDP=sn6.nextInt();

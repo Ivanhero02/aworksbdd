@@ -1,5 +1,5 @@
 /*
- * Clase de conexion, ejecucion de procedimientos almacenados y desconexion para la primera instancia
+ * Clase de conexion, ejecucion de procedimientos almacenados y desconexion para una sola instancia sin distribuir
  */
 package SQL;
 
